@@ -9,3 +9,6 @@ motor:
 #define  PWMB  6  //Right Motor Speed pin (ENB)
 #define  BIN1  A2  //Motor-R forward (IN3)
 #define  BIN2  A3  //Motor-L backward(IN4)
+
+Sensoren:
+5. ST188: reflective infrared photoelectric sensor, for obstacle avoiding
