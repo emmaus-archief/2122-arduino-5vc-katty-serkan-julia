@@ -32,7 +32,7 @@ De test-code is een ander programma dan je eindcode. De testcode laat snel zien 
 De voorbeeldcode in deze repo is een goed begin van testcode. Je kunt die zelf afmaken en in deze map zetten.
 
 ## Stap 3: Toestandsdiagram 
-- [ ] Je hebt een toestandsdiagram gemaakt. Dit sla je op in GitHub.
+- [X] Je hebt een toestandsdiagram gemaakt. Dit sla je op in GitHub.
 - [ ] Je hebt je docent gevraagd om feedback over je toestandsdiagram. De feedback heb je verwerkt. Het uiteindelijke resultaat sla je weer op in GitHub.
 
 In deze map zet je een tekening van je toestandsdiagram.
