@@ -33,7 +33,7 @@ De voorbeeldcode in deze repo is een goed begin van testcode. Je kunt die zelf a
 
 ## Stap 3: Toestandsdiagram 
 - [X] Je hebt een toestandsdiagram gemaakt. Dit sla je op in GitHub.
-- [ ] Je hebt je docent gevraagd om feedback over je toestandsdiagram. De feedback heb je verwerkt. Het uiteindelijke resultaat sla je weer op in GitHub.
+- [X] Je hebt je docent gevraagd om feedback over je toestandsdiagram. De feedback heb je verwerkt. Het uiteindelijke resultaat sla je weer op in GitHub.
 
 In deze map zet je een tekening van je toestandsdiagram.
 
