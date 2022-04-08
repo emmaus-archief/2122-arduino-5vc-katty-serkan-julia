@@ -9,9 +9,9 @@ In deze repo bewaar je alle bestanden die je maakt voor de opdracht Arduino.
 
 ## Stap 1: Circuit
 
-- [ ] Je weet welke sensoren en actuatoren je wilt gebruiken.
+- [x] Je weet welke sensoren en actuatoren je wilt gebruiken.
 - [ ] Je hebt een schema getekend van je ontwerp, waaruit blijkt hoe alles aangesloten moet worden (bij een project waar de hardware al klaar is beschrijf je welke sensoren en actuatoren op welke pinnen zijn aangesloten). Dit sla je op in GitHub.
-- [ ] Je hebt je circuit in elkaar gezet (bij een project waar de hardware al klaar is is dit niet nodig).
+- [x] Je hebt je circuit in elkaar gezet (bij een project waar de hardware al klaar is is dit niet nodig).
 
 Het circuit is een aansluitschema, je kunt daarop zien welke componenten je gebruikt en op welke pinnen van de arduino die zijn aangesloten. Als je in je Arduino gebruik maakt van een kant en klaar circuit, dan kun je in plaats van een tekening ook een tabel geven waarin staat aan welke pinnen sensoren en actuatoren zitten die je gaat gebruiken.
 
