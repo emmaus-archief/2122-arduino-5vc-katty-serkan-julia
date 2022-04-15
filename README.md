@@ -23,7 +23,7 @@ Je kunt een circuit bijvoorbeeld als volgt maken
 
 
 ## Stap 2: Test Code
-- [ ] Je hebt code gemaakt waarmee je kunt testen dat alle onderdelen op je circuit goed werken. Dit sla je op in GitHub.
+- [x] Je hebt code gemaakt waarmee je kunt testen dat alle onderdelen op je circuit goed werken. Dit sla je op in GitHub.
 
 In de map voor deze stap zet je de test-code (het .ino bestand) voor je circuit. De naam van een .ino bestand mag geen spaties bevatten en het .ino bestand moet in een map staan met dezelfde naam.
 
