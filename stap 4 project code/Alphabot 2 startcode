@@ -18,7 +18,14 @@
 #define ECHO   2
 #define TRIG   3
 
-// variabelen voor de toestanden maken
+const int pinMotorSnelheidL = 6; //motor links PWMA
+const int pinMotorSnelheidR = 5; //motor rechts PWMB
+
+// variabelen om waarden van sensoren en actuatoren te onthouden
+int snelheidR = 0;
+int  snelheidL = 0;
+
+// variabelen voor de toestanden maken 
 // toestanden:
 
 const int START = 1;
@@ -26,6 +33,7 @@ const int EINDE = 2;
 const int RIJDEN = 3;
 const int STOPPEN = 4;
 const int DRAAIEN = 5;
+const int UIT = 6;
 
 /*****************************************
    functies die je gebruikt maken
@@ -78,7 +86,7 @@ void setup() {
 }
 
 //zet begintoestand
-toestand = START;
+toestand = UIT;
 
 void loop() {
   // lees sensorwaarden
@@ -120,13 +128,16 @@ int Distance_test()         // Measure the distance
 }  
 
   // bepaal toestand
-  if (toestand == START) {
-    if (digitalRead(buttonPin) == HIGH) {
+  if (digitalRead(buttonPin) == HIGH) {
+      toestand = START
+      Serial.println("Nieuwe toestand: START");
+     }
+  
+   if (toestand == START) {
       toestand = RIJDEN;
       Serial.println("Nieuwe toestand: RIJDEN");
     }
-
-  }
+    
   if (toestand == RIJDEN) {
     if (digitalRead(afstandsPin) < 10) {
       toestand = REMMEN;
@@ -146,15 +157,17 @@ int Distance_test()         // Measure the distance
     }
   }
 
-  // zet stoplichten conform toestand
-  if (toestand == BORING) {
-    for (int i = 1; i <= 8; i = i + 1) {
-      stoplicht(i, ROOD);
-    }
+  // bepaal toestand afhankelijk van snelheid
+  
+  if (toestand == RIJDEN) {
+     snelheidR = 128;
+     snelheidL = 128;
   }
+  
+  
+  
   if (toestand == KAMIKAZE) {
-    for (int i = 1; i <= 8; i = i + 1) {
-      stoplicht(i, GROEN);
+    
     }
   }
   if (toestand == EXCITING) {
@@ -162,6 +175,10 @@ int Distance_test()         // Measure the distance
       stoplicht(i, ORANJE);
     }
   }
+  
+  //zet waarden voor actautoren, voor alle toestanden
+  analogWrite(pinMotorSnelheidR, snelheidR);
+  analogWrite(pinMotorSnelheidL, snelheidL);
 
   // vertraging om te zorgen dat berichten op de seriele monitor leesbaar blijven
   delay(100);
