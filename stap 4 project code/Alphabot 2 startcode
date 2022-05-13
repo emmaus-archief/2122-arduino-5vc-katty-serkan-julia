@@ -1,12 +1,5 @@
 /*****************************************
-   Stoplicht Startcode
-   met toestansdiagrammen
-   Emmauscollege
-   v20201114GEE
- *****************************************/
-
-/*****************************************
-   variabelen die je gebruikt maken
+   variabelen waarvan je gebruik maakt
  *****************************************/
 // gebruikte pinnen
 #define PWMA   6           //Left Motor Speed pin (ENA)
@@ -17,6 +10,16 @@
 #define BIN2   A3          //Motor-R backward (IN4)
 #define ECHO   2
 #define TRIG   3
+
+// declareren variabelen pins
+const int PWMA   6           //Left Motor Speed pin (ENA)
+const int AIN2   A0          //Motor-L forward (IN2).
+const int AIN1   A1          //Motor-L backward (IN1)
+const int PWMB   5           //Right Motor Speed pin (ENB)
+const int BIN1   A2          //Motor-R forward (IN3)
+const int BIN2   A3          //Motor-R backward (IN4)
+const int ECHO   2
+const int TRIG   3
 
 const int pinMotorSnelheidL = 6; //motor links PWMA
 const int pinMotorSnelheidR = 5; //motor rechts PWMB
@@ -36,33 +39,12 @@ const int DRAAIEN = 5;
 const int UIT = 6;
 
 /*****************************************
-   functies die je gebruikt maken
+   functies waarvan je gebruik maakt
  *****************************************/
 
-  }
-  if (kleur ==  ROOD) {
-    digitalWrite(pinRood  , HIGH);
-    digitalWrite(pinOranje, LOW );
-    digitalWrite(pinGroen , LOW );
-  }
-  if (kleur ==  ORANJE) {
-    if (welke == 7 || welke == 8) {
-      Serial.println("FOUT: Voetgangerslicht kan niet op oranje");
-    } else {
-      digitalWrite(pinRood  , LOW );
-      digitalWrite(pinOranje, HIGH);
-      digitalWrite(pinGroen , LOW );
-    }
-  }
-  if (kleur ==  GROEN) {
-    digitalWrite(pinRood  , LOW );
-    digitalWrite(pinOranje, LOW );
-    digitalWrite(pinGroen , HIGH);
-  }
-}
 
 /*****************************************
-   setup() en loop()
+            setup()
  *****************************************/
 
 void setup() {
@@ -87,6 +69,10 @@ void setup() {
 
 //zet begintoestand
 toestand = UIT;
+
+/*****************************************
+            Loop
+ *****************************************/
 
 void loop() {
   // lees sensorwaarden
