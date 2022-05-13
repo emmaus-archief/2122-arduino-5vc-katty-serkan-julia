@@ -28,6 +28,9 @@ const int pinMotorSnelheidR = 5; //motor rechts PWMB
 int snelheidR = 0;
 int  snelheidL = 0;
 
+//variabele toestand maken
+var toestand = 0;
+
 // variabelen voor de toestanden maken 
 // toestanden:
 
@@ -38,10 +41,25 @@ const int STOPPEN = 4;
 const int DRAAIEN = 5;
 const int UIT = 6;
 
+//zet begintoestand
+toestand = UIT;
+
 /*****************************************
    functies waarvan je gebruik maakt
  *****************************************/
-
+ 
+//Afstand meten 
+int AfstandTest()        {
+  digitalWrite(TRIG, LOW);   // set trig pin low 2μs
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);  // set trig pin 10μs , at last 10us 
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);    // set trig pin low
+  float Fdistance = pulseIn(ECHO, HIGH);  // Read echo pin high level time(us)
+  Fdistance= Fdistance/58;       //Y m=（X s*344）/2
+  // X s=（ 2*Y m）/344 ==》X s=0.0058*Y m ==》cm = us /58       
+  return (int)Fdistance;
+} 
 
 /*****************************************
             setup()
@@ -67,8 +85,7 @@ void setup() {
   stop();    
 }
 
-//zet begintoestand
-toestand = UIT;
+
 
 /*****************************************
             Loop
@@ -100,18 +117,7 @@ void loop() {
   delay(250);
 }
 
-int Distance_test()         // Measure the distance 
-{
-  digitalWrite(TRIG, LOW);   // set trig pin low 2μs
-  delayMicroseconds(2);
-  digitalWrite(TRIG, HIGH);  // set trig pin 10μs , at last 10us 
-  delayMicroseconds(10);
-  digitalWrite(TRIG, LOW);    // set trig pin low
-  float Fdistance = pulseIn(ECHO, HIGH);  // Read echo pin high level time(us)
-  Fdistance= Fdistance/58;       //Y m=（X s*344）/2
-  // X s=（ 2*Y m）/344 ==》X s=0.0058*Y m ==》cm = us /58       
-  return (int)Fdistance;
-}  
+ 
 
   // bepaal toestand
   if (digitalRead(buttonPin) == HIGH) {
@@ -154,8 +160,8 @@ int Distance_test()         // Measure the distance
   
   if (toestand == KAMIKAZE) {
     
-    }
   }
+  
   if (toestand == EXCITING) {
     for (int i = 1; i <= 6; i = i + 1) {
       stoplicht(i, ORANJE);
