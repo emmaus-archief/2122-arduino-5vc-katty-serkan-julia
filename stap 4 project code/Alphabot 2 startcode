@@ -98,26 +98,11 @@ void loop() {
   
   // bepaal afstand
   {
-  Afstand = Distance_test();                 //display distance 
+  Afstand = AfstandTest();                 //display distance 
   Serial.print("Distance = ");            //print distance
   Serial.print(Distance);       
   Serial.println("cm");  
-  
-  if(Distance < 10)      //Ultrasonic range ranging 2cm to 400cm
-  {
-    right();
-    //left();
-    delay(500);
-    stop();     
   }
-  else
-  {
-    forward();    
-  }
-  delay(250);
-}
-
- 
 
   // bepaal toestand
   if (digitalRead(buttonPin) == HIGH) {
@@ -131,7 +116,7 @@ void loop() {
     }
     
   if (toestand == RIJDEN) {
-    if (digitalRead(afstandsPin) < 10) {
+    if (digitalRead(Afstand) < 10) {
       toestand = REMMEN;
       Serial.println("Nieuwe toestand: REMMEN");
    }
