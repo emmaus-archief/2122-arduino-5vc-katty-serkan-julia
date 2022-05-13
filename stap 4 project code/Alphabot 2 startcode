@@ -2,24 +2,24 @@
    variabelen waarvan je gebruik maakt
  *****************************************/
 // gebruikte pinnen
-#define PWMA   6           //Left Motor Speed pin (ENA)
-#define AIN2   A0          //Motor-L forward (IN2).
-#define AIN1   A1          //Motor-L backward (IN1)
-#define PWMB   5           //Right Motor Speed pin (ENB)
-#define BIN1   A2          //Motor-R forward (IN3)
-#define BIN2   A3          //Motor-R backward (IN4)
-#define ECHO   2
-#define TRIG   3
+#define PWMA   6           //Linker motor snelheid pin (ENA)
+#define AIN2   A0          //Motor Links naar voren (IN2).
+#define AIN1   A1          //Motor links naar achteren (IN1)
+#define PWMB   5           //Rechter motor snelheid pin (ENB)
+#define BIN1   A2          //Motor rechts naar voren (IN3)
+#define BIN2   A3          //Motor rechts naar achter (IN4)
+#define ECHO   2           //Ultrasonische ontvanger pin   
+#define TRIG   3           //Ultrasonische uitzender pin
 
 // declareren variabelen pins
-const int PWMA   6           //Left Motor Speed pin (ENA)
-const int AIN2   A0          //Motor-L forward (IN2).
-const int AIN1   A1          //Motor-L backward (IN1)
-const int PWMB   5           //Right Motor Speed pin (ENB)
-const int BIN1   A2          //Motor-R forward (IN3)
-const int BIN2   A3          //Motor-R backward (IN4)
-const int ECHO   2           //Recieve pin
-const int TRIG   3           //Transmit pin
+const int PWMA   6           //Linker motor snelheid pin (ENA)
+const int AIN2   A0          //Motor links naar voren (IN2).
+const int AIN1   A1          //Motor links naar achteren(IN1)
+const int PWMB   5           //Rechter motor snelheid pin (ENB)
+const int BIN1   A2          //Motor rechts naar voren (IN3)
+const int BIN2   A3          //Motor rechts naar achteren (IN4)
+const int ECHO   2           //Ultrasonische ontvanger pin
+const int TRIG   3           //Ultrasonishce uitzender pin
 
 const int pinMotorSnelheidL = 6; //motor links PWMA
 const int pinMotorSnelheidR = 5; //motor rechts PWMB
@@ -102,7 +102,22 @@ void loop() {
   Serial.print("Distance = ");            //print distance
   Serial.print(Distance);       
   Serial.println("cm");  
+  
+  if(Distance < 10)      //Ultrasonic range ranging 2cm to 400cm
+  {
+    right();
+    //left();
+    delay(500);
+    stop();     
   }
+  else
+  {
+    forward();    
+  }
+  delay(250);
+}
+
+ 
 
   // bepaal toestand
   if (digitalRead(buttonPin) == HIGH) {
@@ -116,7 +131,7 @@ void loop() {
     }
     
   if (toestand == RIJDEN) {
-    if (digitalRead(Afstand) < 10) {
+    if (digitalRead(afstandsPin) < 10) {
       toestand = REMMEN;
       Serial.println("Nieuwe toestand: REMMEN");
    }
