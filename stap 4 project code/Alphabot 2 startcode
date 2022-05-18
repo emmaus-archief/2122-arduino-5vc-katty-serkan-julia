@@ -1,6 +1,7 @@
 /*****************************************
-   variabelen waarvan je gebruik maakt
- *****************************************/
+// *****************************************
+//   variabelen waarvan je gebruik maakt
+// *****************************************
 // gebruikte pinnen
 #define AIN2   A0          //Motor Links naar voren (IN2).
 #define AIN1   A1          //Motor links naar achteren (IN1)
@@ -9,26 +10,25 @@
 #define ECHO   2           //Ultrasonische ontvanger pin   
 #define TRIG   3           //Ultrasonische uitzender pin
 
-
-#define pinMotorSnelheidL = 6; //motor links PWMA
-#define pinMotorSnelheidR = 5; //motor rechts PWMB
+int const motorSnelheidL = 6; //motor links PWMA
+int const motorSnelheidR = 5; //motor rechts PWMB
 
 // variabelen om waarden van sensoren en actuatoren te onthouden
 int snelheidR = 0;
 int  snelheidL = 0;
 
 //variabele toestand maken
-#define toestand = 0;
+int const toestand = 0;
 
 // variabelen voor de toestanden maken 
 // toestanden:
 
-#define START = 1;
-#define EINDE = 2;
-#define RIJDEN = 3;
-#define STOPPEN = 4;
-#define DRAAIEN = 5;
-#define UIT = 6;
+int const START = 1;
+int const EINDE = 2;
+int const RIJDEN = 3;
+int const STOPPEN = 4;
+int const DRAAIEN = 5;
+int const UIT = 6;
 
 //zet begintoestand
 toestand = UIT;
@@ -63,14 +63,14 @@ void setup() {
    {
   pinMode(ECHO, INPUT);    // Define the ultrasonic echo input pin
   pinMode(TRIG, OUTPUT);   // Define the ultrasonic trigger input pin 
-  pinMode(PWMA,OUTPUT);                     
+  pinMode(motorSnelheidL,OUTPUT);                     
   pinMode(AIN2,OUTPUT);      
   pinMode(AIN1,OUTPUT);
-  pinMode(PWMB,OUTPUT);       
+  pinMode(motorSnelheidR,OUTPUT);       
   pinMode(AIN1,OUTPUT);     
   pinMode(AIN2,OUTPUT); 
-  analogWrite(PWMA,Speed);
-  analogWrite(PWMB,Speed);
+  analogWrite(motorSnelheidL,Speed);
+  analogWrite(motorSnelheidR,Speed);
   stop();    
 }
 
@@ -127,9 +127,10 @@ void loop() {
   }
   
   if (toestand == REMMEN) {
-    if (digitalRead (PWMA) == LOW && digitalread (PWMB) == LOW){
-    toestand = DRAAIEN;
-    Serial.println("Nieuwe toestand: DRAAIEN");
+   motorSnelheidL = 0;
+   motorSnelheidR = 0;
+   delay(200);
+   toestand = draaien;
     }
   }
   
@@ -137,16 +138,7 @@ void loop() {
     if (){
     }
   }
-  
-  if (toestand == KAMIKAZE) {
-    
-  }
-  
-  if (toestand == EXCITING) {
-    for (int i = 1; i <= 6; i = i + 1) {
-      stoplicht(i, ORANJE);
-    }
-  }
+ 
   
   //zet waarden voor actautoren, voor alle toestanden
   analogWrite(pinMotorSnelheidR, snelheidR);
