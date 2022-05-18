@@ -11,35 +11,26 @@
 #define ECHO   2           //Ultrasonische ontvanger pin   
 #define TRIG   3           //Ultrasonische uitzender pin
 
-// declareren variabelen pins
-const int PWMA   6           //Linker motor snelheid pin (ENA)
-const int AIN2   A0          //Motor links naar voren (IN2).
-const int AIN1   A1          //Motor links naar achteren(IN1)
-const int PWMB   5           //Rechter motor snelheid pin (ENB)
-const int BIN1   A2          //Motor rechts naar voren (IN3)
-const int BIN2   A3          //Motor rechts naar achteren (IN4)
-const int ECHO   2           //Ultrasonische ontvanger pin
-const int TRIG   3           //Ultrasonishce uitzender pin
 
-const int pinMotorSnelheidL = 6; //motor links PWMA
-const int pinMotorSnelheidR = 5; //motor rechts PWMB
+#define pinMotorSnelheidL = 6; //motor links PWMA
+#define pinMotorSnelheidR = 5; //motor rechts PWMB
 
 // variabelen om waarden van sensoren en actuatoren te onthouden
 int snelheidR = 0;
 int  snelheidL = 0;
 
 //variabele toestand maken
-var toestand = 0;
+#define toestand = 0;
 
 // variabelen voor de toestanden maken 
 // toestanden:
 
-const int START = 1;
-const int EINDE = 2;
-const int RIJDEN = 3;
-const int STOPPEN = 4;
-const int DRAAIEN = 5;
-const int UIT = 6;
+#define START = 1;
+#define EINDE = 2;
+#define RIJDEN = 3;
+#define STOPPEN = 4;
+#define DRAAIEN = 5;
+#define UIT = 6;
 
 //zet begintoestand
 toestand = UIT;
