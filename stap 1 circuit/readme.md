@@ -19,5 +19,9 @@ Ultrasonic sensor:<br>
 #define ECHO   2)<br>
 #define TRIG   3)<br>
 
+Joystick:<br>
 
+#define Addr  0x20
 
+#define beep_on  PCF8574Write(0xDF & PCF8574Read())
+#define beep_off PCF8574Write(0x20 | PCF8574Read())
