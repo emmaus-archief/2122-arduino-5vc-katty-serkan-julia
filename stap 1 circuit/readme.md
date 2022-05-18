@@ -1,49 +1,24 @@
-De readme.md vind je in de hoofdmap van deze repo.
+De readme.md vind je in de hoofdmap van deze repo.<br>
 
-Sensoren:
-1. Ultrasonic
+Sensoren:<br>
+1. Ultrasonic<br>
 
 Actuator:
-1. TB6612FNG dual H-bridge motor driver
-2. Joystick
+1. TB6612FNG dual H-bridge motor driver<br>
+2. Joystick<br>
 
 
-Pinnen:
+#define  PWMA  5  //Left Motor Speed pin (ENA) <br>
+#define  AIN2  A0  //Motor-L forward (IN2)<br>
+#define  AIN1  A1  //Motor-L backward (IN1)<br>
+#define  PWMB  6  //Right Motor Speed pin (ENB)<br>
+#define  BIN1  A2  //Motor-R forward (IN3)<br>
+#define  BIN2  A3  //Motor-L backward(IN4)<br>
 
-motor:
-#define  PWMA  5  //Left Motor Speed pin (ENA)
-#define  AIN2  A0  //Motor-L forward (IN2)
-#define  AIN1  A1  //Motor-L backward (IN1)
-#define  PWMB  6  //Right Motor Speed pin (ENB)
-#define  BIN1  A2  //Motor-R forward (IN3)
-#define  BIN2  A3  //Motor-L backward(IN4)
+#define ECHO   2)<br>
+#define TRIG   3)<br>
 
-ultrasonic:
 
-raging:
-#define ECHO   2
-#define TRIG   3
-
-infrarood obstacle avoiding:
-#define PWMA   6           //Left Motor Speed pin (ENA)
-#define AIN2   A0          //Motor-L forward (IN2).
-#define AIN1   A1          //Motor-L backward (IN1)
-#define PWMB   5           //Right Motor Speed pin (ENB)
-#define BIN1   A2          //Motor-R forward (IN3)
-#define BIN2   A3          //Motor-R backward (IN4)
-#define ECHO   2
-#define TRIG   3
-
-#define Addr  0x20
-
-obstacle avoiding without infrared:
-#define PWMA   6           //Left Motor Speed pin (ENA)
-#define AIN2   A0          //Motor-L forward (IN2).
-#define AIN1   A1          //Motor-L backward (IN1)
-#define PWMB   5           //Right Motor Speed pin (ENB)
-#define BIN1   A2          //Motor-R forward (IN3)
-#define BIN2   A3          //Motor-R backward (IN4)
-#define ECHO   2
-#define TRIG   3
+#define Addr  0x20 <br>
 
 
