@@ -16,9 +16,6 @@ int const motorSnelheidR = 5; //motor rechts PWMB
 int snelheidR = 0;
 int  snelheidL = 0;
 
-//variabele toestand maken
-int const toestand = 0;
-
 // variabelen voor de toestanden maken 
 // toestanden:
 
@@ -29,8 +26,8 @@ int const STOPPEN = 4;
 int const DRAAIEN = 5;
 int const UIT = 6;
 
-//zet begintoestand
-toestand = UIT;
+//variabele toestand maken
+int const toestand = UIT;
 
 /*****************************************
    functies waarvan je gebruik maakt
@@ -68,9 +65,8 @@ void setup() {
   pinMode(motorSnelheidR,OUTPUT);       
   pinMode(AIN1,OUTPUT);     
   pinMode(AIN2,OUTPUT); 
-  analogWrite(motorSnelheidL,Speed);
-  analogWrite(motorSnelheidR,Speed);
-  stop();    
+  analogWrite(motorSnelheidL,snelheidL);
+  analogWrite(motorSnelheidR,snelheidR);  
 }
 
 
@@ -140,8 +136,8 @@ void loop() {
  
   
   //zet waarden voor actautoren, voor alle toestanden
-  analogWrite(pinMotorSnelheidR, snelheidR);
-  analogWrite(pinMotorSnelheidL, snelheidL);
+  analogWrite(motorSnelheidR, snelheidR);
+  analogWrite(motorSnelheidL, snelheidL);
 
   // vertraging om te zorgen dat berichten op de seriele monitor leesbaar blijven
   delay(100);
