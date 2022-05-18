@@ -106,10 +106,8 @@ void loop() {
   delay(250);
 }
 
- 
-
   // bepaal toestand
-  if (digitalRead(buttonPin) == HIGH) {
+  if (digitalRead(Addr) == HIGH) {
       toestand = START
       Serial.println("Nieuwe toestand: START");
      }
@@ -120,7 +118,9 @@ void loop() {
     }
     
   if (toestand == RIJDEN) {
-    if (digitalRead(afstandsPin) < 10) {
+    snelheidR = 128;
+    snelheidL = 128;
+  if (digitalRead(Fdistance) < 10) {
       toestand = REMMEN;
       Serial.println("Nieuwe toestand: REMMEN");
    }
@@ -137,15 +137,6 @@ void loop() {
     if (){
     }
   }
-
-  // bepaal toestand afhankelijk van snelheid
-  
-  if (toestand == RIJDEN) {
-     snelheidR = 128;
-     snelheidL = 128;
-  }
-  
-  
   
   if (toestand == KAMIKAZE) {
     
