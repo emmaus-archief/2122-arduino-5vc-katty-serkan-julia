@@ -2,10 +2,8 @@
    variabelen waarvan je gebruik maakt
  *****************************************/
 // gebruikte pinnen
-#define PWMA   6           //Linker motor snelheid pin (ENA)
 #define AIN2   A0          //Motor Links naar voren (IN2).
 #define AIN1   A1          //Motor links naar achteren (IN1)
-#define PWMB   5           //Rechter motor snelheid pin (ENB)
 #define BIN1   A2          //Motor rechts naar voren (IN3)
 #define BIN2   A3          //Motor rechts naar achter (IN4)
 #define ECHO   2           //Ultrasonische ontvanger pin   
