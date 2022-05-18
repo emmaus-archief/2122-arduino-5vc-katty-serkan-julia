@@ -20,6 +20,4 @@ Ultrasonic sensor:<br>
 #define TRIG   3)<br>
 
 
-#define Addr  0x20 <br>
-
 
