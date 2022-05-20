@@ -98,8 +98,8 @@ void loop() {
     }
     
   if (toestand == RIJDEN) {
-    snelheidR = 128;
-    snelheidL = 128;
+    digitalWrite(BIN1, HIGH)
+    digitalWrite(AIN2, HIGH)
   if (digitalRead(Fdistance) < 10) {
       toestand = REMMEN;
       Serial.println("Nieuwe toestand: REMMEN");
@@ -107,15 +107,15 @@ void loop() {
   }
   
   if (toestand == REMMEN) {
-   motorSnelheidL = 0;
-   motorSnelheidR = 0;
+   digitalWrite(BIN1, LOW);
+   digitalWrite(AIN2, LOW);
    delay(200);
    toestand = DRAAIEN;
     }
   
   if (toestand == DRAAIEN) {
-    snelheidL = 0;
-    snelheidR = 128;
+    digitalWrite(AIN1, HIGH);
+    digitalWrite(BIN1, HIGH);
     delay(200);
     toestand = RIJDEN;
   }
