@@ -14,7 +14,7 @@
 #define beep_off PCF8574Write(0x20 | PCF8574Read())
 
 int joystickClicked = -1;
-int Speed = 200;
+int Speed = 50;
 void PCF8574Write(byte data);
 byte PCF8574Read();
 void forward();
@@ -81,7 +81,7 @@ void loop() {
     stop();
   }
 
-  if (Fdistance < 20) {
+  if (Fdistance < 10) {
     stop();
     toestand = DRAAIEN;
   }
@@ -91,9 +91,9 @@ void loop() {
     delay(100);
     beep_off;
     left();
-    delay(500);
+    delay(random(500, 1000));
     stop();
-    delay(200);
+    Speed = random(50, 200);
     toestand = RIJDEN;
   }
 
