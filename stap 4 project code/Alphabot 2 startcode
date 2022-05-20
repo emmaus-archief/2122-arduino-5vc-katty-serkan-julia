@@ -1,25 +1,27 @@
-//*****************************************
-//   variabelen waarvan je gebruik maakt
-// *****************************************
-// gebruikte pinnen
-#define AIN2   A0          //Motor Links naar voren (IN2).
-#define AIN1   A1          //Motor links naar achteren (IN1)
+#include <Wire.h>
+
+#define PWMA   6           //Left Motor Speed pin (ENA)
+#define AIN2   A0          //Motor-L forward (IN2).
+#define AIN1   A1          //Motor-L backward (IN1)
 #define BIN1   A2          //Motor rechts naar voren (IN3)
 #define BIN2   A3          //Motor rechts naar achter (IN4)
-#define ECHO   2           //Ultrasonische ontvanger pin   
-#define TRIG   3           //Ultrasonische uitzender pin
+#define PWMB   5           //Right Motor Speed pin (ENB)
+#define ECHO   2
+#define TRIG   3
 #define Addr  0x20
 
-int const motorSnelheidL = 6; //motor links PWMA
-int const motorSnelheidR = 5; //motor rechts PWMB
+#define beep_on  PCF8574Write(0xDF & PCF8574Read())
+#define beep_off PCF8574Write(0x20 | PCF8574Read())
 
-// variabelen om waarden van sensoren en actuatoren te onthouden
-int snelheidR = 0;
-int  snelheidL = 0;
+int joystickClicked = -1;
+int Speed = 200;
+void PCF8574Write(byte data);
+byte PCF8574Read();
+void forward();
+void right();
+void left();
+void stop();
 int Fdistance = 0;
-
-// variabelen voor de toestanden maken 
-// toestanden:
 
 int const START = 1;
 int const EINDE = 2;
@@ -31,116 +33,134 @@ int const UIT = 6;
 //variabele toestand maken
 int toestand = UIT;
 
-/*****************************************
-   functies waarvan je gebruik maakt
- *****************************************/
- 
-//Afstand meten 
+//Afstand meten
 int AfstandTest()        {
   digitalWrite(TRIG, LOW);   // set trig pin low 2μs
   delayMicroseconds(2);
-  digitalWrite(TRIG, HIGH);  // set trig pin 10μs , at last 10us 
+  digitalWrite(TRIG, HIGH);  // set trig pin 10μs , at last 10us
   delayMicroseconds(10);
   digitalWrite(TRIG, LOW);    // set trig pin low
   float Fdistance = pulseIn(ECHO, HIGH);  // Read echo pin high level time(us)
-  Fdistance= Fdistance/58;       //Y m=（X s*344）/2
-  // X s=（ 2*Y m）/344 ==》X s=0.0058*Y m ==》cm = us /58       
+  Fdistance = Fdistance / 58;    //Y m=（X s*344）/2
+  // X s=（ 2*Y m）/344 ==》X s=0.0058*Y m ==》cm = us /58
   return (int)Fdistance;
-} 
-
-/*****************************************
-            setup()
- *****************************************/
-
-void setup()
-{
-  // enable console en stuur opstartbericht
-  Serial.begin(115200);
-  Serial.println("Start Alphabot");
-
-  // zet pinmode 
-   
-  pinMode(ECHO, INPUT);    // Define the ultrasonic echo input pin
-  pinMode(TRIG, OUTPUT);   // Define the ultrasonic trigger input pin 
-  pinMode(motorSnelheidL,OUTPUT);                     
-  pinMode(AIN2,OUTPUT);      
-  pinMode(AIN1,OUTPUT);
-  pinMode(motorSnelheidR,OUTPUT);       
-  pinMode(AIN1,OUTPUT);     
-  pinMode(AIN2,OUTPUT); 
-  digitalRead(Addr);
-  analogWrite(motorSnelheidL,snelheidL);
-  analogWrite(motorSnelheidR,snelheidR);  
 }
 
-
-
-/*****************************************
-            Loop
- *****************************************/
+void setup() {
+  Serial.begin(115200);
+  Wire.begin();
+  pinMode(PWMA, OUTPUT);
+  pinMode(PWMB, OUTPUT);
+  pinMode(AIN2, OUTPUT);
+  pinMode(AIN1, OUTPUT);
+  pinMode(ECHO, INPUT);    // Define the ultrasonic echo input pin
+  pinMode(TRIG, OUTPUT);   // Define the ultrasonic trigger input pin
+  analogWrite(PWMA, 150);
+  analogWrite(PWMB, 150);
+  stop();
+}
 
 void loop() {
-  
+  Fdistance = AfstandTest();                 //display distance
+  PCF8574Write(0x1F | PCF8574Read());
+  joystickClicked = PCF8574Read() | 0xE0;
 
-  // bepaal afstand
-  
-  Fdistance = AfstandTest();                 //display distance 
-  Serial.print("Distance = ");            //print distance
-  Serial.print(Fdistance);  
-  Serial.println("cm");  
-  
-  
+  if (joystickClicked != 0xFF)
+  {
+    if (digitalRead(joystickClicked) == 1) {
+      if (toestand == UIT) {
+        toestand = START;
+      }
+      if (toestand == RIJDEN) {
+        toestand = UIT;
+      }
+    }
+  }
 
-  // bepaal toestand
-  if (digitalRead(Addr) == HIGH && toestand == UIT) {
-      toestand = START;
-      Serial.println("Nieuwe toestand: START");
-     }
-  
-   if (toestand == START) {
-      toestand = RIJDEN;
-      Serial.println("Nieuwe toestand: RIJDEN");
-    }
-    
-  if (toestand == RIJDEN) {
-    digitalWrite(BIN1, HIGH);
-    digitalWrite(AIN2, HIGH);
-    }
-    
-  if (digitalRead(Fdistance) < 10) {
-      toestand = REMMEN;
-      Serial.println("Nieuwe toestand: REMMEN");
-   }
-  
-  if (toestand == REMMEN) {
-   digitalWrite(BIN1, LOW);
-   digitalWrite(AIN2, LOW);
-   delay(200);
-   toestand = DRAAIEN;
-    }
-  
-  
+  if (toestand == UIT) {
+    stop();
+  }
+
+  if (Fdistance < 20) {
+    stop();
+    toestand = DRAAIEN;
+  }
+
   if (toestand == DRAAIEN) {
-    digitalWrite(AIN1, HIGH);
-    digitalWrite(BIN1, HIGH);
+    beep_on;
+    delay(100);
+    beep_off;
+    left();
+    delay(500);
+    stop();
     delay(200);
     toestand = RIJDEN;
-    }
-
-  if (Addr == HIGH && toestand == RIJDEN) {
-    toestand == UIT;
   }
- 
-  
-  //zet waarden voor actautoren, voor alle toestanden
-  analogWrite (motorSnelheidR, snelheidR);
-  analogWrite (motorSnelheidL, snelheidL);
 
-  // vertraging om te zorgen dat berichten op de seriele monitor leesbaar blijven
-  delay(100);
-  
+  if (toestand == START) {
+    toestand = RIJDEN;
+  }
 
+  if (toestand == RIJDEN) {
+    forward();
+  }
+  //    beep_on;
+  //    beep_off;
 }
 
+void PCF8574Write(byte data)
+{
+  Wire.beginTransmission(Addr);
+  Wire.write(data);
+  Wire.endTransmission();
 }
 
+byte PCF8574Read()
+{
+  int data = -1;
+  Wire.requestFrom(Addr, 1);
+  if (Wire.available()) {
+    data = Wire.read();
+  }
+  return data;
+}
+
+void forward()
+{
+  analogWrite(PWMA, Speed);
+  analogWrite(PWMB, Speed);
+  digitalWrite(AIN1, LOW);
+  digitalWrite(AIN2, HIGH);
+  digitalWrite(BIN1, LOW);
+  digitalWrite(BIN2, HIGH);
+}
+
+void right()
+{
+  analogWrite(PWMA,50);
+  analogWrite(PWMB,50);
+  digitalWrite(AIN1,LOW);
+  digitalWrite(AIN2,HIGH);
+  digitalWrite(BIN1,HIGH); 
+  digitalWrite(BIN2,LOW); 
+}
+
+void left()
+{
+  analogWrite(PWMA, 50);
+  analogWrite(PWMB, 50);
+  digitalWrite(AIN1, HIGH);
+  digitalWrite(AIN2, LOW);
+  digitalWrite(BIN1, LOW);
+  digitalWrite(BIN2, HIGH);
+}
+
+void stop()
+{
+  analogWrite(PWMA, 0);
+  analogWrite(PWMB, 0);
+  digitalWrite(AIN1, LOW);
+  digitalWrite(AIN2, LOW);
+  digitalWrite(BIN1, LOW);
+  digitalWrite(BIN2, LOW);
+}
