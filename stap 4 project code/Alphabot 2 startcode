@@ -78,10 +78,7 @@ void setup() {
  *****************************************/
 
 void loop() {
-  // lees sensorwaarden
-  knop7 = digitalRead(pin7Knop);
-  knop8 = digitalRead(pin8Knop);
-  
+
   // bepaal afstand
   {
   Afstand = AfstandTest();                 //display distance 
@@ -89,22 +86,8 @@ void loop() {
   Serial.print(Distance);       
   Serial.println("cm");  }
   
-  if(Distance < 10)      //Ultrasonic range ranging 2cm to 400cm
-  {
-    right();
-    //left();
-    delay(500);
-    stop();     
-  }
-  else
-  {
-    forward();    
-  }
-  delay(250);
-
-
   // bepaal toestand
-  if (digitalRead(Addr) == HIGH) {
+  if (digitalRead(Addr) == HIGH && toestand == UIT) {
       toestand = START
       Serial.println("Nieuwe toestand: START");
      }
@@ -136,7 +119,11 @@ void loop() {
     delay(200);
     toestand = RIJDEN;
   }
- 
+  
+   if (Addr == HIGH && toestand == RIJDEN) {
+    toestand == UIT;
+  }
+  
   
   //zet waarden voor actautoren, voor alle toestanden
   analogWrite(motorSnelheidR, snelheidR);
