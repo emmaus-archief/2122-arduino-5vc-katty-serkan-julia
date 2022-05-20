@@ -44,7 +44,7 @@ Je kunt een toestandsdiagram bijvoorbeeld als volgt maken
 
 ## Stap 4: Project Code
 
-- [ ] Je hebt het toestandsdiagram in code omgezet, zodat alle toestanden doorlopen kunnen worden met jouw circuit. Daarbij heb je het door de docent aangeleverde projectcode als startpunt gebruikt. Voor projecten waar geen startcode is sluit je aan bij wat je in de les geleerd hebt over toestandsdiagrammencode. Nog niet alle onderdelen van je apparaat hoeven het te doen, zolang alle toestanden maar doorlopen kunnen worden. De laatste versie van je code sla je steeds op op GitHub.
+- [X] Je hebt het toestandsdiagram in code omgezet, zodat alle toestanden doorlopen kunnen worden met jouw circuit. Daarbij heb je het door de docent aangeleverde projectcode als startpunt gebruikt. Voor projecten waar geen startcode is sluit je aan bij wat je in de les geleerd hebt over toestandsdiagrammencode. Nog niet alle onderdelen van je apparaat hoeven het te doen, zolang alle toestanden maar doorlopen kunnen worden. De laatste versie van je code sla je steeds op op GitHub.
 - [ ]	Je hebt de code van je toestandsdiagram uitgebreid, zodat je project het doet. De laatste versie van je code sla je steeds op op GitHub.
 - [ ]	Je hebt je ontwerp uitgebreid met extra ideeën en deze heb je verwerkt in je aansluitschema (als je extra Arduino-onderdelen hebt toegevoegd) en in je code. De laatste versie van je code sla je steeds op op GitHub.
 
