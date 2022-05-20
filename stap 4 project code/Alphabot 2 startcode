@@ -16,6 +16,7 @@ int const motorSnelheidR = 5; //motor rechts PWMB
 // variabelen om waarden van sensoren en actuatoren te onthouden
 int snelheidR = 0;
 int  snelheidL = 0;
+int Fdistance = 0;
 
 // variabelen voor de toestanden maken 
 // toestanden:
@@ -23,12 +24,12 @@ int  snelheidL = 0;
 int const START = 1;
 int const EINDE = 2;
 int const RIJDEN = 3;
-int const STOPPEN = 4;
+int const REMMEN = 4;
 int const DRAAIEN = 5;
 int const UIT = 6;
 
 //variabele toestand maken
-int const toestand = RIJDEN;
+int toestand = UIT;
 
 /*****************************************
    functies waarvan je gebruik maakt
@@ -83,16 +84,16 @@ void loop() {
 
   // bepaal afstand
   
-  Afstand = AfstandTest();                 //display distance 
+  Fdistance = AfstandTest();                 //display distance 
   Serial.print("Distance = ");            //print distance
-  Serial.print(Distance);       
+  Serial.print(Fdistance);  
   Serial.println("cm");  
   
   
 
   // bepaal toestand
   if (digitalRead(Addr) == HIGH && toestand == UIT) {
-      toestand = START
+      toestand = START;
       Serial.println("Nieuwe toestand: START");
      }
   
@@ -102,8 +103,9 @@ void loop() {
     }
     
   if (toestand == RIJDEN) {
-    digitalWrite(BIN1, HIGH)
-    digitalWrite(AIN2, HIGH) }
+    digitalWrite(BIN1, HIGH);
+    digitalWrite(AIN2, HIGH);
+    }
     
   if (digitalRead(Fdistance) < 10) {
       toestand = REMMEN;
