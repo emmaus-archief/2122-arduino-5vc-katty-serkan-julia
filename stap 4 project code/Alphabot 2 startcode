@@ -8,6 +8,7 @@
 #define BIN2   A3          //Motor rechts naar achter (IN4)
 #define ECHO   2           //Ultrasonische ontvanger pin   
 #define TRIG   3           //Ultrasonische uitzender pin
+#define Addr  0x20         //Joystick
 
 int const motorSnelheidL = 6; //motor links PWMA
 int const motorSnelheidR = 5; //motor rechts PWMB
@@ -65,6 +66,7 @@ void setup() {
   pinMode(motorSnelheidR,OUTPUT);       
   pinMode(AIN1,OUTPUT);     
   pinMode(AIN2,OUTPUT); 
+  digitalRead(Addr);
   analogWrite(motorSnelheidL,snelheidL);
   analogWrite(motorSnelheidR,snelheidR);  
 }
@@ -85,7 +87,7 @@ void loop() {
   Afstand = AfstandTest();                 //display distance 
   Serial.print("Distance = ");            //print distance
   Serial.print(Distance);       
-  Serial.println("cm");  
+  Serial.println("cm");  }
   
   if(Distance < 10)      //Ultrasonic range ranging 2cm to 400cm
   {
@@ -99,7 +101,7 @@ void loop() {
     forward();    
   }
   delay(250);
-}
+
 
   // bepaal toestand
   if (digitalRead(Addr) == HIGH) {
@@ -125,13 +127,14 @@ void loop() {
    motorSnelheidL = 0;
    motorSnelheidR = 0;
    delay(200);
-   toestand = draaien;
+   toestand = DRAAIEN;
     }
-  }
   
   if (toestand == DRAAIEN) {
-    if (){
-    }
+    snelheidL = 0;
+    snelheidR = 128;
+    delay(200);
+    toestand = RIJDEN;
   }
  
   
