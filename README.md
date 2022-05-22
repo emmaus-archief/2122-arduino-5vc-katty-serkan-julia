@@ -45,13 +45,13 @@ Je kunt een toestandsdiagram bijvoorbeeld als volgt maken
 ## Stap 4: Project Code
 
 - [X] Je hebt het toestandsdiagram in code omgezet, zodat alle toestanden doorlopen kunnen worden met jouw circuit. Daarbij heb je het door de docent aangeleverde projectcode als startpunt gebruikt. Voor projecten waar geen startcode is sluit je aan bij wat je in de les geleerd hebt over toestandsdiagrammencode. Nog niet alle onderdelen van je apparaat hoeven het te doen, zolang alle toestanden maar doorlopen kunnen worden. De laatste versie van je code sla je steeds op op GitHub.
-- [ ]	Je hebt de code van je toestandsdiagram uitgebreid, zodat je project het doet. De laatste versie van je code sla je steeds op op GitHub.
+- [X]	Je hebt de code van je toestandsdiagram uitgebreid, zodat je project het doet. De laatste versie van je code sla je steeds op op GitHub.
 - [ ]	Je hebt je ontwerp uitgebreid met extra ideeën en deze heb je verwerkt in je aansluitschema (als je extra Arduino-onderdelen hebt toegevoegd) en in je code. De laatste versie van je code sla je steeds op op GitHub.
 
 In de map voor deze stap zet je de Arduino-code (het .ino bestand) van je project. De naam van een .ino bestand mag geen spaties bevatten en het .ino bestand moet in een map staan met dezelfde naam.
 
 ## Stap 5: Video
-- [ ] Maak een video die de werking van je project demonstreert.
+- [X] Maak een video die de werking van je project demonstreert.
 
 Het is een video met geluid (uitleg tijdens de demonstratie) in .mp4 of .mov formaat van maximaal 20MB of .txt bestand met link naar youtube. De video duurt maximaal 2 minuten.
 
